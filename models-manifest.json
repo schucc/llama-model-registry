@@ -1,0 +1,478 @@
+{
+  "manifest_version": 2,
+  "last_updated": "2026-06-05",
+  "schema_docs": "https://github.com/your-username/app-model-registry/blob/main/README.md",
+  "app": {
+    "name": "Diary App",
+    "use_cases": ["conversation", "summarization"],
+    "runtime": "llama.cpp",
+    "platform": "macOS (Apple Silicon)",
+    "minimum_parameters_billions": 8
+  },
+
+  "hardware_tiers": {
+    "comment": "Detect unified memory at startup on macOS using: sysctl hw.memsize",
+    "tier_1": {
+      "label": "Entry",
+      "description": "M1/M2 MacBook Air or base Mac mini — 8GB unified memory",
+      "min_ram_gb": 8,
+      "max_ram_gb": 8,
+      "typical_devices": ["MacBook Air M1 8GB", "MacBook Air M2 8GB", "Mac mini M1 8GB"],
+      "note": "8GB Macs shipped through 2023. M4 Macs start at 16GB. Still a large installed base."
+    },
+    "tier_2": {
+      "label": "Standard",
+      "description": "M1/M2/M3/M4 — 16GB unified memory",
+      "min_ram_gb": 16,
+      "max_ram_gb": 16,
+      "typical_devices": [
+        "MacBook Air M1/M2/M3/M4 16GB",
+        "Mac mini M2/M4 16GB"
+      ],
+      "note": "Most common tier from 2024 onward."
+    },
+    "tier_3": {
+      "label": "Performance",
+      "description": "MacBook Pro or Mac mini Pro — 24–36GB unified memory",
+      "min_ram_gb": 24,
+      "max_ram_gb": 36,
+      "typical_devices": [
+        "MacBook Pro M3/M4 24GB",
+        "MacBook Pro M3/M4 Pro 24–36GB",
+        "Mac mini M4 Pro 24GB"
+      ]
+    },
+    "tier_4": {
+      "label": "Enthusiast",
+      "description": "MacBook Pro Max or Mac Studio — 36–64GB unified memory",
+      "min_ram_gb": 36,
+      "max_ram_gb": 64,
+      "typical_devices": [
+        "MacBook Pro M3/M4 Max 36–48GB",
+        "Mac Studio M2/M3 Max 32–48GB"
+      ]
+    },
+    "tier_5": {
+      "label": "Pro",
+      "description": "Mac Studio Ultra or Mac Pro — 64GB+ unified memory",
+      "min_ram_gb": 64,
+      "max_ram_gb": 512,
+      "typical_devices": [
+        "Mac Studio M2/M3 Ultra 64–512GB",
+        "Mac Pro M2 Ultra 192GB"
+      ]
+    }
+  },
+
+  "models": [
+
+    {
+      "id": "llama-3.1-8b-q4_k_m",
+      "vendor": "Meta",
+      "family": "Llama 3.1",
+      "name": "Llama 3.1 8B Instruct (Q4_K_M)",
+      "description": "Meta's reliable 8B workhorse. Excellent all-around quality for diary conversation and summarization. Best default for 16GB Macs.",
+      "parameters_billions": 8,
+      "quantization": "Q4_K_M",
+      "context_length": 131072,
+      "license": "llama3.1",
+      "license_url": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct/blob/main/LICENSE",
+      "diary_suitability": {
+        "conversation": "excellent",
+        "summarization": "excellent",
+        "notes": "Nuanced, empathetic responses. Handles long diary entries well. Strongly recommended default for tier_2."
+      },
+      "hardware": {
+        "recommended_tiers": ["tier_2", "tier_3"],
+        "min_ram_gb": 8,
+        "ram_usage_gb": 6.5,
+        "expected_tokens_per_second": "15-35",
+        "note": "Technically fits on 8GB but leaves very little headroom. Warn user and offer Qwen2.5-7B as alternative."
+      },
+      "file": {
+        "filename": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+        "size_bytes": 5278433280,
+        "size_human": "4.92 GB",
+        "sha256": "f2be3e1a239c12c9f3f01a962b11fb2807f8032fdb63b0a5502ea42ddef55e44"
+      },
+      "sources": [
+        {
+          "name": "HuggingFace (bartowski) — primary",
+          "url": "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+          "priority": 1,
+          "supports_resume": true
+        },
+        {
+          "name": "HuggingFace (lmstudio-community) — fallback",
+          "url": "https://huggingface.co/lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+          "priority": 2,
+          "supports_resume": true
+        }
+      ]
+    },
+
+    {
+      "id": "llama-3.3-70b-q4_k_m",
+      "vendor": "Meta",
+      "family": "Llama 3.3",
+      "name": "Llama 3.3 70B Instruct (Q4_K_M)",
+      "description": "Meta's flagship open model. Exceptional diary quality — rich, empathetic, deeply coherent. Requires 48GB+ unified memory.",
+      "parameters_billions": 70,
+      "quantization": "Q4_K_M",
+      "context_length": 131072,
+      "license": "llama3.3",
+      "license_url": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/blob/main/LICENSE",
+      "diary_suitability": {
+        "conversation": "exceptional",
+        "summarization": "exceptional",
+        "notes": "Best-in-class for diary use. Only suitable for Mac Studio / MacBook Pro Max users with 48GB+."
+      },
+      "hardware": {
+        "recommended_tiers": ["tier_4", "tier_5"],
+        "min_ram_gb": 48,
+        "ram_usage_gb": 43.0,
+        "expected_tokens_per_second": "8-15",
+        "note": "42.5 GB download. Warn user before starting. Estimated 30–90 min on typical broadband."
+      },
+      "file": {
+        "filename": "Llama-3.3-70B-Instruct-Q4_K_M.gguf",
+        "size_bytes": 45634904064,
+        "size_human": "42.5 GB",
+        "sha256": "32df3baccb556f9840059b2528b2dee4d3d516b24afdfb9d0c56ff5f63e3a664"
+      },
+      "sources": [
+        {
+          "name": "HuggingFace (bartowski) — primary",
+          "url": "https://huggingface.co/bartowski/Llama-3.3-70B-Instruct-GGUF/resolve/main/Llama-3.3-70B-Instruct-Q4_K_M.gguf",
+          "priority": 1,
+          "supports_resume": true
+        },
+        {
+          "name": "HuggingFace (lmstudio-community) — fallback",
+          "url": "https://huggingface.co/lmstudio-community/Llama-3.3-70B-Instruct-GGUF/resolve/main/Llama-3.3-70B-Instruct-Q4_K_M.gguf",
+          "priority": 2,
+          "supports_resume": true
+        }
+      ]
+    },
+
+    {
+      "id": "qwen2.5-7b-q4_k_m",
+      "vendor": "Alibaba / Qwen Team",
+      "family": "Qwen 2.5",
+      "name": "Qwen 2.5 7B Instruct (Q4_K_M)",
+      "description": "Alibaba's 7B model. Punches well above its size class — often matches or beats Llama 3.1 8B on instruction following. Great diary choice for 16GB Macs.",
+      "parameters_billions": 7,
+      "quantization": "Q4_K_M",
+      "context_length": 32768,
+      "license": "apache-2.0",
+      "license_url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/blob/main/LICENSE",
+      "diary_suitability": {
+        "conversation": "excellent",
+        "summarization": "excellent",
+        "notes": "Strong instruction following, clean writing style. Slightly smaller context than Llama 3.1 (32K vs 128K) but more than sufficient for diary use."
+      },
+      "hardware": {
+        "recommended_tiers": ["tier_1", "tier_2"],
+        "min_ram_gb": 8,
+        "ram_usage_gb": 6.0,
+        "expected_tokens_per_second": "18-38"
+      },
+      "file": {
+        "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+        "size_bytes": 5025268736,
+        "size_human": "4.68 GB",
+        "sha256": "3e357ab3eda2c442f25c0080bb8998eedc05fd16ce1728eacff9ccc5c3d240c6"
+      },
+      "sources": [
+        {
+          "name": "HuggingFace (bartowski) — primary",
+          "url": "https://huggingface.co/bartowski/Qwen2.5-7B-Instruct-GGUF/resolve/main/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+          "priority": 1,
+          "supports_resume": true
+        },
+        {
+          "name": "HuggingFace (lmstudio-community) — fallback",
+          "url": "https://huggingface.co/lmstudio-community/Qwen2.5-7B-Instruct-GGUF/resolve/main/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+          "priority": 2,
+          "supports_resume": true
+        }
+      ]
+    },
+
+    {
+      "id": "qwen2.5-14b-q4_k_m",
+      "vendor": "Alibaba / Qwen Team",
+      "family": "Qwen 2.5",
+      "name": "Qwen 2.5 14B Instruct (Q4_K_M)",
+      "description": "The 14B sweet spot. Consistently outperforms Llama 3.1 8B at diary tasks while fitting comfortably in 16GB. Top recommendation for tier_2 users who want a step up.",
+      "parameters_billions": 14,
+      "quantization": "Q4_K_M",
+      "context_length": 32768,
+      "license": "apache-2.0",
+      "license_url": "https://huggingface.co/Qwen/Qwen2.5-14B-Instruct/blob/main/LICENSE",
+      "diary_suitability": {
+        "conversation": "excellent",
+        "summarization": "excellent",
+        "notes": "Strong nuanced language quality. Recommended upgrade path from 8B for users with 16GB+ who want noticeably better output."
+      },
+      "hardware": {
+        "recommended_tiers": ["tier_2", "tier_3"],
+        "min_ram_gb": 16,
+        "ram_usage_gb": 10.5,
+        "expected_tokens_per_second": "12-25"
+      },
+      "file": {
+        "filename": "Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+        "size_bytes": 9651019776,
+        "size_human": "8.99 GB",
+        "sha256": "e47ad95dad6ff848b431053b375adb5d39321290ea2c638682577dafca87c008"
+      },
+      "sources": [
+        {
+          "name": "HuggingFace (bartowski) — primary",
+          "url": "https://huggingface.co/bartowski/Qwen2.5-14B-Instruct-GGUF/resolve/main/Qwen2.5-14B-Instruct-Q4_K_M.gguf",
+          "priority": 1,
+          "supports_resume": true
+        }
+      ]
+    },
+
+    {
+      "id": "qwen2.5-32b-q4_k_m",
+      "vendor": "Alibaba / Qwen Team",
+      "family": "Qwen 2.5",
+      "name": "Qwen 2.5 32B Instruct (Q4_K_M)",
+      "description": "Qwen's 32B model — approaches 70B quality at roughly half the size. Excellent fit for 36–48GB Macs.",
+      "parameters_billions": 32,
+      "quantization": "Q4_K_M",
+      "context_length": 32768,
+      "license": "apache-2.0",
+      "license_url": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct/blob/main/LICENSE",
+      "diary_suitability": {
+        "conversation": "exceptional",
+        "summarization": "exceptional",
+        "notes": "Near-70B quality for diary writing. Strong, nuanced language. Ideal for Mac Studio / Pro users who want premium quality without a 40GB+ download."
+      },
+      "hardware": {
+        "recommended_tiers": ["tier_3", "tier_4"],
+        "min_ram_gb": 24,
+        "ram_usage_gb": 21.0,
+        "expected_tokens_per_second": "10-20"
+      },
+      "file": {
+        "filename": "Qwen2.5-32B-Instruct-Q4_K_M.gguf",
+        "size_bytes": 19851336576,
+        "size_human": "18.5 GB",
+        "sha256": "2e5f6daea180dbc59f65a40641e94d3973b5dbaa32b3c0acf54647fa874e519e"
+      },
+      "sources": [
+        {
+          "name": "HuggingFace (bartowski) — primary",
+          "url": "https://huggingface.co/bartowski/Qwen2.5-32B-Instruct-GGUF/resolve/main/Qwen2.5-32B-Instruct-Q4_K_M.gguf",
+          "priority": 1,
+          "supports_resume": true
+        }
+      ]
+    },
+
+    {
+      "id": "qwen2.5-72b-q4_k_m",
+      "vendor": "Alibaba / Qwen Team",
+      "family": "Qwen 2.5",
+      "name": "Qwen 2.5 72B Instruct (Q4_K_M)",
+      "description": "Qwen's flagship 72B model. Rivals GPT-4-class quality for writing tasks. Requires 64GB+ Mac.",
+      "parameters_billions": 72,
+      "quantization": "Q4_K_M",
+      "context_length": 32768,
+      "license": "apache-2.0",
+      "license_url": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct/blob/main/LICENSE",
+      "diary_suitability": {
+        "conversation": "exceptional",
+        "summarization": "exceptional",
+        "notes": "Exceptional writing quality. Best Qwen option for diary. Only for Mac Studio Ultra / high-end users."
+      },
+      "hardware": {
+        "recommended_tiers": ["tier_5"],
+        "min_ram_gb": 56,
+        "ram_usage_gb": 49.0,
+        "expected_tokens_per_second": "6-12",
+        "note": "47.4 GB download. Warn user before starting."
+      },
+      "file": {
+        "filename": "Qwen2.5-72B-Instruct-Q4_K_M.gguf",
+        "size_bytes": 50891276288,
+        "size_human": "47.4 GB",
+        "sha256": "e4c8fad16946be8cf0bbf67eb8f4e18fc7415a5a6d2854b4cda453edb4082545"
+      },
+      "sources": [
+        {
+          "name": "HuggingFace (bartowski) — primary",
+          "url": "https://huggingface.co/bartowski/Qwen2.5-72B-Instruct-GGUF/resolve/main/Qwen2.5-72B-Instruct-Q4_K_M.gguf",
+          "priority": 1,
+          "supports_resume": true
+        }
+      ]
+    },
+
+    {
+      "id": "gemma-2-9b-q4_k_m",
+      "vendor": "Google",
+      "family": "Gemma 2",
+      "name": "Gemma 2 9B IT (Q4_K_M)",
+      "description": "Google's Gemma 2 9B instruction-tuned model. Highly regarded for fluent, natural writing — excellent diary companion. Fits 16GB Macs.",
+      "parameters_billions": 9,
+      "quantization": "Q4_K_M",
+      "context_length": 8192,
+      "license": "gemma",
+      "license_url": "https://ai.google.dev/gemma/terms",
+      "diary_suitability": {
+        "conversation": "excellent",
+        "summarization": "excellent",
+        "notes": "Notably fluent and warm writing style — well suited to personal diary tone. Context window is smaller (8K) but sufficient for per-entry use."
+      },
+      "hardware": {
+        "recommended_tiers": ["tier_2", "tier_3"],
+        "min_ram_gb": 8,
+        "ram_usage_gb": 7.0,
+        "expected_tokens_per_second": "14-30"
+      },
+      "file": {
+        "filename": "gemma-2-9b-it-Q4_K_M.gguf",
+        "size_bytes": 6183616512,
+        "size_human": "5.76 GB",
+        "sha256": "13b2a7b4115bbd0900162edcebe476da1ba1fc24e718e8b40d32f6e300f56dfe"
+      },
+      "sources": [
+        {
+          "name": "HuggingFace (bartowski) — primary",
+          "url": "https://huggingface.co/bartowski/gemma-2-9b-it-GGUF/resolve/main/gemma-2-9b-it-Q4_K_M.gguf",
+          "priority": 1,
+          "supports_resume": true
+        },
+        {
+          "name": "HuggingFace (lmstudio-community) — fallback",
+          "url": "https://huggingface.co/lmstudio-community/gemma-2-9b-it-GGUF/resolve/main/gemma-2-9b-it-Q4_K_M.gguf",
+          "priority": 2,
+          "supports_resume": true
+        }
+      ]
+    },
+
+    {
+      "id": "gemma-4-e4b-q4_k_m",
+      "vendor": "Google",
+      "family": "Gemma 4",
+      "name": "Gemma 4 E4B IT (Q4_K_M)",
+      "description": "Google's newest Gemma 4 model in the E4B (Effective 4B) size — but runs at ~8B quality thanks to mixture-of-experts architecture. Very fast on Apple Silicon.",
+      "parameters_billions": 4,
+      "effective_parameters_billions": 8,
+      "architecture": "mixture-of-experts",
+      "quantization": "Q4_K_M",
+      "context_length": 131072,
+      "license": "gemma",
+      "license_url": "https://ai.google.dev/gemma/terms",
+      "diary_suitability": {
+        "conversation": "excellent",
+        "summarization": "good",
+        "notes": "MoE model: activates ~4B params but performs like a larger model. Excellent speed and quality ratio. Very new — released April 2026. Great option for any Mac."
+      },
+      "hardware": {
+        "recommended_tiers": ["tier_1", "tier_2", "tier_3"],
+        "min_ram_gb": 8,
+        "ram_usage_gb": 6.0,
+        "expected_tokens_per_second": "20-45",
+        "note": "Faster than its size suggests due to MoE. Excellent for real-time diary conversation."
+      },
+      "file": {
+        "filename": "google_gemma-4-E4B-it-Q4_K_M.gguf",
+        "size_bytes": 5809991680,
+        "size_human": "5.41 GB",
+        "sha256": "b937a48e96379116137c50acbe39fd1b46eb101d2df4e560f47f5e2171b6451e"
+      },
+      "sources": [
+        {
+          "name": "HuggingFace (bartowski) — primary",
+          "url": "https://huggingface.co/bartowski/google_gemma-4-E4B-it-GGUF/resolve/main/google_gemma-4-E4B-it-Q4_K_M.gguf",
+          "priority": 1,
+          "supports_resume": true
+        }
+      ]
+    },
+
+    {
+      "id": "gemma-4-31b-q4_k_m",
+      "vendor": "Google",
+      "family": "Gemma 4",
+      "name": "Gemma 4 31B IT (Q4_K_M)",
+      "description": "Google's largest Gemma 4 model. Top-tier quality with long 128K context. Ideal for users who want the best Google model and have 36GB+.",
+      "parameters_billions": 31,
+      "quantization": "Q4_K_M",
+      "context_length": 131072,
+      "license": "gemma",
+      "license_url": "https://ai.google.dev/gemma/terms",
+      "diary_suitability": {
+        "conversation": "exceptional",
+        "summarization": "exceptional",
+        "notes": "Google's best diary model. Fluent, warm, deep. 128K context means it can hold months of diary history in a single session. Released April 2026."
+      },
+      "hardware": {
+        "recommended_tiers": ["tier_3", "tier_4", "tier_5"],
+        "min_ram_gb": 24,
+        "ram_usage_gb": 21.0,
+        "expected_tokens_per_second": "8-18"
+      },
+      "file": {
+        "filename": "google_gemma-4-31B-it-Q4_K_M.gguf",
+        "size_bytes": 21047578624,
+        "size_human": "19.6 GB",
+        "sha256": "35dacd53f9dde83fe20a4596efce2b2f72d2ebb6e4141186533419e9e98bc269"
+      },
+      "sources": [
+        {
+          "name": "HuggingFace (bartowski) — primary",
+          "url": "https://huggingface.co/bartowski/google_gemma-4-31B-it-GGUF/resolve/main/google_gemma-4-31B-it-Q4_K_M.gguf",
+          "priority": 1,
+          "supports_resume": true
+        }
+      ]
+    }
+
+  ],
+
+  "app_selection_logic": {
+    "comment": "Suggested auto-selection logic based on detected unified memory. Your app should detect RAM via sysctl hw.memsize on macOS and divide by 1073741824 to get GB.",
+    "rules": [
+      {
+        "condition": "ram_gb == 8",
+        "recommended_model": "gemma-4-e4b-q4_k_m",
+        "alternatives": ["qwen2.5-7b-q4_k_m", "llama-3.1-8b-q4_k_m"],
+        "note": "Gemma 4 E4B is the best fit for 8GB — fast MoE model with excellent quality. Qwen 2.5 7B is a strong alternative. Llama 3.1 8B fits but leaves tight headroom."
+      },
+      {
+        "condition": "ram_gb == 16",
+        "recommended_model": "qwen2.5-14b-q4_k_m",
+        "alternatives": ["llama-3.1-8b-q4_k_m", "gemma-2-9b-q4_k_m", "gemma-4-e4b-q4_k_m"],
+        "note": "Qwen 2.5 14B is the sweet spot for 16GB — noticeably better than 8B models. Llama 3.1 8B and Gemma 2 9B are faster alternatives."
+      },
+      {
+        "condition": "ram_gb >= 24 && ram_gb < 48",
+        "recommended_model": "qwen2.5-32b-q4_k_m",
+        "alternatives": ["gemma-4-31b-q4_k_m", "llama-3.3-70b-q4_k_m"],
+        "note": "Qwen 32B or Gemma 4 31B deliver near-70B quality. Llama 3.3 70B fits on 48GB only."
+      },
+      {
+        "condition": "ram_gb >= 48 && ram_gb < 64",
+        "recommended_model": "llama-3.3-70b-q4_k_m",
+        "alternatives": ["qwen2.5-72b-q4_k_m", "qwen2.5-32b-q4_k_m"],
+        "note": "Llama 3.3 70B and Qwen 2.5 72B both fit. Warn about 40–47 GB download size."
+      },
+      {
+        "condition": "ram_gb >= 64",
+        "recommended_model": "qwen2.5-72b-q4_k_m",
+        "alternatives": ["llama-3.3-70b-q4_k_m"],
+        "note": "Both 70B/72B models run comfortably. Offer user the choice."
+      }
+    ]
+  }
+}
