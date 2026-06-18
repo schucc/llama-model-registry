@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "last_updated": "2026-06-16",
-  "schema_docs": "https://github.com/your-username/app-model-registry/blob/main/README.md",
+  "last_updated": "2026-06-18",
+  "schema_docs": "https://github.com/schucc/llama-model-registry/blob/main/README.md",
   "app": {
     "name": "Diary App",
     "use_cases": ["conversation", "summarization"],
