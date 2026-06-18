@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "last_updated": "2026-06-18",
+  "last_updated": "2026-06-19",
   "schema_docs": "https://github.com/schucc/llama-model-registry/blob/main/README.md",
   "app": {
     "name": "Diary App",
@@ -77,6 +77,7 @@
       "context_length": 131072,
       "license": "llama3.1",
       "license_url": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct/blob/main/LICENSE",
+      "llama_server_args": ["--no-jinja"],
       "diary_suitability": {
         "conversation": "excellent",
         "summarization": "excellent",
@@ -122,6 +123,7 @@
       "context_length": 131072,
       "license": "llama3.3",
       "license_url": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/blob/main/LICENSE",
+      "llama_server_args": ["--no-jinja"],
       "diary_suitability": {
         "conversation": "exceptional",
         "summarization": "exceptional",
@@ -167,6 +169,7 @@
       "context_length": 32768,
       "license": "apache-2.0",
       "license_url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/blob/main/LICENSE",
+      "llama_server_args": ["--reasoning-budget 0"],
       "diary_suitability": {
         "conversation": "excellent",
         "summarization": "excellent",
@@ -211,6 +214,7 @@
       "context_length": 32768,
       "license": "apache-2.0",
       "license_url": "https://huggingface.co/Qwen/Qwen2.5-14B-Instruct/blob/main/LICENSE",
+      "llama_server_args": ["--reasoning-budget 0"],
       "diary_suitability": {
         "conversation": "excellent",
         "summarization": "excellent",
@@ -249,6 +253,7 @@
       "context_length": 32768,
       "license": "apache-2.0",
       "license_url": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct/blob/main/LICENSE",
+      "llama_server_args": ["--reasoning-budget 0"],
       "diary_suitability": {
         "conversation": "exceptional",
         "summarization": "exceptional",
@@ -287,6 +292,7 @@
       "context_length": 32768,
       "license": "apache-2.0",
       "license_url": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct/blob/main/LICENSE",
+      "llama_server_args": ["--reasoning-budget 0"],
       "diary_suitability": {
         "conversation": "exceptional",
         "summarization": "exceptional",
@@ -326,6 +332,7 @@
       "context_length": 8192,
       "license": "gemma",
       "license_url": "https://ai.google.dev/gemma/terms",
+      "llama_server_args": [],
       "diary_suitability": {
         "conversation": "excellent",
         "summarization": "excellent",
@@ -372,6 +379,7 @@
       "context_length": 131072,
       "license": "gemma",
       "license_url": "https://ai.google.dev/gemma/terms",
+      "llama_server_args": ["--reasoning", "off"],
       "diary_suitability": {
         "conversation": "excellent",
         "summarization": "good",
@@ -411,6 +419,7 @@
       "context_length": 131072,
       "license": "gemma",
       "license_url": "https://ai.google.dev/gemma/terms",
+      "llama_server_args": [],
       "diary_suitability": {
         "conversation": "exceptional",
         "summarization": "exceptional",
