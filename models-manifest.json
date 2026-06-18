@@ -386,9 +386,9 @@
       },
       "file": {
         "filename": "google_gemma-4-E4B-it-Q4_K_M.gguf",
-        "size_bytes": 5809991680,
-        "size_human": "5.41 GB",
-        "sha256": "b937a48e96379116137c50acbe39fd1b46eb101d2df4e560f47f5e2171b6451e"
+        "size_bytes": 5405168384,
+        "size_human": "5.03 GB",
+        "sha256": "51865750adafd22de56994a343d5a887cc1a589b9bae41d62b748c8bd0ca9c76"
       },
       "sources": [
         {
