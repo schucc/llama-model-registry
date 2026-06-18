@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "last_updated": "2026-06-19",
+  "last_updated": "2026-06-20",
   "schema_docs": "https://github.com/schucc/llama-model-registry/blob/main/README.md",
   "app": {
     "name": "Diary App",
@@ -169,7 +169,7 @@
       "context_length": 32768,
       "license": "apache-2.0",
       "license_url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/blob/main/LICENSE",
-      "llama_server_args": ["--reasoning-budget 0"],
+      "llama_server_args": ["--jinja", "--reasoning-budget", "0"],
       "diary_suitability": {
         "conversation": "excellent",
         "summarization": "excellent",
@@ -214,7 +214,7 @@
       "context_length": 32768,
       "license": "apache-2.0",
       "license_url": "https://huggingface.co/Qwen/Qwen2.5-14B-Instruct/blob/main/LICENSE",
-      "llama_server_args": ["--reasoning-budget 0"],
+      "llama_server_args": ["--jinja", "--reasoning-budget", "0"],
       "diary_suitability": {
         "conversation": "excellent",
         "summarization": "excellent",
@@ -253,7 +253,7 @@
       "context_length": 32768,
       "license": "apache-2.0",
       "license_url": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct/blob/main/LICENSE",
-      "llama_server_args": ["--reasoning-budget 0"],
+      "llama_server_args": ["--jinja", "--reasoning-budget", "0"],
       "diary_suitability": {
         "conversation": "exceptional",
         "summarization": "exceptional",
@@ -292,7 +292,7 @@
       "context_length": 32768,
       "license": "apache-2.0",
       "license_url": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct/blob/main/LICENSE",
-      "llama_server_args": ["--reasoning-budget 0"],
+      "llama_server_args": ["--jinja", "--reasoning-budget", "0"],
       "diary_suitability": {
         "conversation": "exceptional",
         "summarization": "exceptional",
@@ -379,7 +379,14 @@
       "context_length": 131072,
       "license": "gemma",
       "license_url": "https://ai.google.dev/gemma/terms",
-      "llama_server_args": ["--reasoning", "off"],
+      "llama_server_args": [
+        "--jinja",
+        "--reasoning", "off",
+        "--reasoning-budget", "0",
+        "--chat-template-kwargs", "{\"enable_thinking\":false}",
+        "--reasoning-format", "deepseek"
+      ],
+      "llama_chat_template_kwargs": { "enable_thinking": false },
       "diary_suitability": {
         "conversation": "excellent",
         "summarization": "good",
@@ -419,7 +426,14 @@
       "context_length": 131072,
       "license": "gemma",
       "license_url": "https://ai.google.dev/gemma/terms",
-      "llama_server_args": [],
+      "llama_server_args": [
+        "--jinja",
+        "--reasoning", "off",
+        "--reasoning-budget", "0",
+        "--chat-template-kwargs", "{\"enable_thinking\":false}",
+        "--reasoning-format", "deepseek"
+      ],
+      "llama_chat_template_kwargs": { "enable_thinking": false },
       "diary_suitability": {
         "conversation": "exceptional",
         "summarization": "exceptional",
