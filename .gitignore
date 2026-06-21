@@ -1,2 +1,4 @@
 .cursorindexingignore
 .specstory/
+.model-test-cache/
+.vscode/
